@@ -3,7 +3,7 @@ import { reactotronRedux as reduxPlugin } from 'reactotron-redux';
 import sagaPlugin from 'reactotron-redux-saga';
 
 if (__DEV__) {
-  const tron = Reactotron.configure()
+  const tron = Reactotron.configure({ host: '192.168.0.28' })
     .useReactNative()
     .use(reduxPlugin())
     .use(sagaPlugin())

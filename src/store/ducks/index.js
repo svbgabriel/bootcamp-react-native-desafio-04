@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
+import { reducer as products } from './products';
 
 export default combineReducers({
-  // Remova essa linha depois de adicionar seus ducks
-  test: () => [],
+  products,
 });
