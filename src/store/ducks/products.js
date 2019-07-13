@@ -5,8 +5,9 @@ import Immutable from 'seamless-immutable';
 
 const { Types, Creators } = createActions({
   loadCategorys: null,
-  setCategorys: ['data'],
+  successCategorys: ['data'],
   failureCategorys: null,
+  setCurrentCategory: ['id'],
   setProducts: ['id'],
 });
 
@@ -18,12 +19,13 @@ export default Creators;
 export const INITIAL_STATE = Immutable({
   categorys: [],
   products: [],
-  currentCategory: null,
+  currentCategory: -1,
 });
 
 /* Reducers to types */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SET_CATEGORYS]: (state, { data }) => state.merge({ categorys: data }),
+  [Types.SUCCESS_CATEGORYS]: (state, { data }) => state.merge({ categorys: data }),
+  [Types.SET_CURRENT_CATEGORY]: (state, { id }) => state.merge({ currentCategory: id }),
   [Types.SET_PRODUCTS]: (state, { id }) => state.merge({ currentCategorie: id }),
 });

@@ -20,6 +20,15 @@ class Main extends Component {
     tabBarIcon: TabIcon,
   };
 
+  static propTypes = {
+    loadCategorys: PropTypes.func.isRequired,
+    categorys: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+      }),
+    ).isRequired,
+  };
+
   componentDidMount() {
     const { loadCategorys } = this.props;
 
@@ -53,6 +62,7 @@ class Main extends Component {
 
 const mapStateToProps = state => ({
   categorys: state.products.categorys,
+  currentCategory: state.products.currentCategory,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);

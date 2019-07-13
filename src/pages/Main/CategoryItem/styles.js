@@ -16,3 +16,8 @@ export const CategoryText = styled.Text`
   color: #fff;
   margin: 5px;
 `;
+
+export const Bar = styled.View`
+  height: 5px;
+  background-color: #fff;
+`;

@@ -6,14 +6,16 @@ export function* loadCategorys() {
   try {
     const response = yield call(api.get, 'categories');
 
-    yield put(ProductsActions.setCategorys(response.data));
+    yield put(ProductsActions.successCategorys(response.data));
+
+    yield put(ProductsActions.setCurrentCategory(response.data[0].id));
   } catch (err) {
     yield put(ProductsActions.failureCategorys());
   }
 }
 
 export function* setProducts({ id }) {
-  const response = yield call(api.get, `/category_products/${id}`);
+  const response = yield call(api.get, `category_products/${id}`);
 
   yield put(ProductsActions.setProducts(response.data));
 }
