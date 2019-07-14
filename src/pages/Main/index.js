@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
@@ -27,6 +27,7 @@ class Main extends Component {
         id: PropTypes.number,
       }),
     ).isRequired,
+    loading: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -51,10 +52,11 @@ class Main extends Component {
   };
 
   render() {
+    const { loading } = this.props;
     return (
       <Container>
         <Header title="GoCommerce" />
-        {this.renderList()}
+        {loading ? <ActivityIndicator size="large" color="#999" /> : this.renderList()}
       </Container>
     );
   }
@@ -63,6 +65,8 @@ class Main extends Component {
 const mapStateToProps = state => ({
   categorys: state.products.categorys,
   currentCategory: state.products.currentCategory,
+  products: state.products.products,
+  loading: state.products.loading,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
