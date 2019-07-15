@@ -6,7 +6,7 @@ export function* loadProducts(id) {
   const response = yield call(api.get, `category_products/${id}`);
 
   try {
-    yield put(ProductsActions.successProducts(response.data));
+    yield put(ProductsActions.successProducts(response.data.products));
   } catch (err) {
     yield put(ProductsActions.failureProducts());
   }

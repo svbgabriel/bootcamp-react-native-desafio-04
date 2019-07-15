@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ProductsActions from '~/store/ducks/products';
-import { Container } from './styles';
+import { Container, ContainerCategorys, ContainerProducts } from './styles';
 import Header from '~/components/Header';
 import CategoryItem from '~/pages/Main/CategoryItem';
+import ProductItem from '~/pages/Main/ProductItem';
 
 const TabIcon = ({ tintColor }) => <Icon name="home" size={20} color={tintColor} />;
 
@@ -27,6 +28,11 @@ class Main extends Component {
         id: PropTypes.number,
       }),
     ).isRequired,
+    products: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+      }),
+    ).isRequired,
     loading: PropTypes.bool.isRequired,
   };
 
@@ -36,9 +42,9 @@ class Main extends Component {
     loadCategorys();
   }
 
-  renderListItem = ({ item }) => <CategoryItem category={item} />;
+  renderCategoryListItem = ({ item }) => <CategoryItem category={item} />;
 
-  renderList = () => {
+  renderCategoryList = () => {
     const { categorys } = this.props;
 
     return (
@@ -46,7 +52,22 @@ class Main extends Component {
         data={categorys}
         horizontal
         keyExtractor={item => String(item.id)}
-        renderItem={this.renderListItem}
+        renderItem={this.renderCategoryListItem}
+      />
+    );
+  };
+
+  renderProductListItem = ({ item }) => <ProductItem product={item} />;
+
+  renderProductList = () => {
+    const { products } = this.props;
+
+    return (
+      <FlatList
+        data={products}
+        numColumns={2}
+        keyExtractor={item => String(item.id)}
+        renderItem={this.renderProductListItem}
       />
     );
   };
@@ -56,7 +77,14 @@ class Main extends Component {
     return (
       <Container>
         <Header title="GoCommerce" />
-        {loading ? <ActivityIndicator size="large" color="#999" /> : this.renderList()}
+        {loading ? (
+          <ActivityIndicator size="large" color="#999" />
+        ) : (
+          <Fragment>
+            <ContainerCategorys>{this.renderCategoryList()}</ContainerCategorys>
+            <ContainerProducts>{this.renderProductList()}</ContainerProducts>
+          </Fragment>
+        )}
       </Container>
     );
   }
@@ -64,7 +92,6 @@ class Main extends Component {
 
 const mapStateToProps = state => ({
   categorys: state.products.categorys,
-  currentCategory: state.products.currentCategory,
   products: state.products.products,
   loading: state.products.loading,
 });
