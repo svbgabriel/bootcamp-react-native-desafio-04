@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable';
 /* Types & Action Creators */
 
 const { Types, Creators } = createActions({
-  loadCategorys: null,
+  loadCategorys: ['id'],
   successCategorys: ['data'],
   failureCategorys: null,
   setCurrentCategory: ['id'],

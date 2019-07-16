@@ -12,15 +12,22 @@ export function* loadProducts(id) {
   }
 }
 
-export function* loadCategorys() {
+export function* loadCategorys({ id }) {
+  console.tron.log(id);
   try {
-    const response = yield call(api.get, 'categories');
+    if (id) {
+      yield put(ProductsActions.setCurrentCategory(id));
 
-    yield put(ProductsActions.successCategorys(response.data));
+      yield loadProducts(id);
+    } else {
+      const response = yield call(api.get, 'categories');
 
-    yield put(ProductsActions.setCurrentCategory(response.data[0].id));
+      yield put(ProductsActions.setCurrentCategory(response.data[0].id));
 
-    yield loadProducts(response.data[0].id);
+      yield put(ProductsActions.successCategorys(response.data));
+
+      yield loadProducts(response.data[0].id);
+    }
   } catch (err) {
     yield put(ProductsActions.failureCategorys());
   }

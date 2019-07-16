@@ -7,9 +7,9 @@ import {
   Container, Category, CategoryText, Bar,
 } from './styles';
 
-const CategoryItem = ({ category, currentCategory, setCurrentCategory }) => (
+const CategoryItem = ({ category, currentCategory, loadCategorys }) => (
   <Container>
-    <Category onPress={() => setCurrentCategory(category.id)}>
+    <Category onPress={() => loadCategorys(category.id)}>
       <CategoryText>{category.title}</CategoryText>
       {currentCategory === category.id && <Bar />}
     </Category>
@@ -21,7 +21,7 @@ CategoryItem.propTypes = {
     id: PropTypes.number,
   }).isRequired,
   currentCategory: PropTypes.number.isRequired,
-  setCurrentCategory: PropTypes.func.isRequired,
+  loadCategorys: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
