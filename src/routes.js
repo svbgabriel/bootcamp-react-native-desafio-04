@@ -5,13 +5,24 @@ import {
 } from 'react-navigation';
 import Main from '~/pages/Main';
 import Cart from '~/pages/Cart';
+import Detail from '~/pages/Detail';
 
 const Routes = createAppContainer(
   createStackNavigator(
     {
       Main: createBottomTabNavigator(
         {
-          Main,
+          Product: createStackNavigator(
+            {
+              Main,
+              Detail,
+            },
+            {
+              defaultNavigationOptions: {
+                header: null,
+              },
+            },
+          ),
           Cart,
         },
         {
