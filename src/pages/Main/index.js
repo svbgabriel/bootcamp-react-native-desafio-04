@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { FlatList, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ProductsActions from '~/store/ducks/products';
@@ -10,17 +9,7 @@ import Header from '~/components/Header';
 import CategoryItem from '~/pages/Main/CategoryItem';
 import ProductItem from '~/pages/Main/ProductItem';
 
-const TabIcon = ({ tintColor }) => <Icon name="home" size={20} color={tintColor} />;
-
-TabIcon.propTypes = {
-  tintColor: PropTypes.string.isRequired,
-};
-
 class Main extends Component {
-  static navigationOptions = {
-    tabBarIcon: TabIcon,
-  };
-
   static propTypes = {
     loadCategorys: PropTypes.func.isRequired,
     categorys: PropTypes.arrayOf(
