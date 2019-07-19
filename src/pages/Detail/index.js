@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import CartActions from '~/store/ducks/cart';
 import Header from '~/components/Header';
 import {
   Container,
@@ -14,7 +17,11 @@ import {
 } from './styles';
 
 class Detail extends Component {
-  addToCart = () => {};
+  addToCart = (product) => {
+    const { AddProductToCart } = this.props;
+
+    AddProductToCart(product);
+  };
 
   render() {
     const { navigation } = this.props;
@@ -32,7 +39,7 @@ class Detail extends Component {
             </Description>
             <Price>R$ {product.price}</Price>
           </TextContainer>
-          <Add>
+          <Add onPress={() => this.addToCart(product)}>
             <AddText>Adicionar ao carrinho</AddText>
           </Add>
         </Product>
@@ -41,4 +48,9 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Detail);

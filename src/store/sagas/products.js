@@ -13,7 +13,6 @@ export function* loadProducts(id) {
 }
 
 export function* loadCategorys({ id }) {
-  console.tron.log(id);
   try {
     if (id) {
       yield put(ProductsActions.setCurrentCategory(id));
