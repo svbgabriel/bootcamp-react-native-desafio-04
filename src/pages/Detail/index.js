@@ -18,9 +18,13 @@ import {
 
 class Detail extends Component {
   addToCart = (product) => {
-    const { AddProductToCart } = this.props;
+    const { AddProductToCart, navigation } = this.props;
 
-    AddProductToCart(product);
+    const cartItem = { ...product, quantity: 1 };
+
+    AddProductToCart(cartItem);
+
+    navigation.navigate('Main');
   };
 
   render() {
