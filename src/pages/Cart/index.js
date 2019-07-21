@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import CartActions from '~/store/ducks/cart';
 import Header from '~/components/Header';
-import { Container } from './styles';
+import CartItem from '~/pages/Cart/CartItem';
+import {
+  Container, SubTotalContainer, SubTotalText, SubTotalPrice, EmptyCart,
+} from './styles';
 
 const TabIcon = ({ tintColor }) => <Icon name="shopping-cart" size={20} color={tintColor} />;
 
@@ -10,16 +17,49 @@ TabIcon.propTypes = {
   tintColor: PropTypes.string.isRequired,
 };
 
-export default class Cart extends Component {
+class Cart extends Component {
   static navigationOptions = {
     tabBarIcon: TabIcon,
   };
 
-  render() {
+  renderCartListItem = ({ item }) => <CartItem product={item} />;
+
+  renderCartList = () => {
+    const { cart } = this.props;
     return (
-      <Container>
-        <Header title="Carrinho" />
-      </Container>
+      <FlatList
+        data={cart}
+        keyExtractor={item => String(item.id)}
+        renderItem={this.renderCartListItem}
+      />
+    );
+  };
+
+  render() {
+    const { cart } = this.props;
+
+    return (
+      <Fragment>
+        <Container>
+          <Header title="Carrinho" />
+          {cart.length > 0 ? this.renderCartList() : <EmptyCart>Carrinho vazio</EmptyCart>}
+        </Container>
+        <SubTotalContainer>
+          <SubTotalText>Subtotal</SubTotalText>
+          <SubTotalPrice>R$</SubTotalPrice>
+        </SubTotalContainer>
+      </Fragment>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  cart: state.cart.cart,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Cart);

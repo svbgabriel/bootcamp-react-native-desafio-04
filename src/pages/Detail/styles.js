@@ -26,6 +26,7 @@ export const TextContainer = styled.View`
 
 export const Description = styled.View`
   flex-direction: column;
+  margin-right: 10px;
 `;
 
 export const Title = styled.Text`
