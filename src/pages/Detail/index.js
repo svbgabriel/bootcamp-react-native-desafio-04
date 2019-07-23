@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ProductsActions from '~/store/ducks/products';
 import CartActions from '~/store/ducks/cart';
 import Header from '~/components/Header';
 import {
@@ -17,6 +19,29 @@ import {
 } from './styles';
 
 class Detail extends Component {
+  static propTypes = {
+    product: PropTypes.shape({
+      image: PropTypes.string,
+      name: PropTypes.string,
+      brand: PropTypes.string,
+      price: PropTypes.number,
+    }).isRequired,
+    loadProduct: PropTypes.func.isRequired,
+    AddProductToCart: PropTypes.func.isRequired,
+    navigation: PropTypes.shape({
+      getParam: PropTypes.func,
+      navigate: PropTypes.func,
+    }).isRequired,
+  };
+
+  componentDidMount() {
+    const { navigation, loadProduct } = this.props;
+
+    const id = navigation.getParam('id');
+
+    loadProduct(id);
+  }
+
   addToCart = (product) => {
     const { AddProductToCart, navigation } = this.props;
 
@@ -28,8 +53,7 @@ class Detail extends Component {
   };
 
   render() {
-    const { navigation } = this.props;
-    const product = navigation.getParam('product');
+    const { product } = this.props;
 
     return (
       <Container>
@@ -52,9 +76,13 @@ class Detail extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
+const mapStateToProps = state => ({
+  product: state.products.currentProduct,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ ...CartActions, ...ProductsActions }, dispatch);
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(Detail);

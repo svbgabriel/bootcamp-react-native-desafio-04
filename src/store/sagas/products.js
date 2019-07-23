@@ -31,3 +31,13 @@ export function* loadCategorys({ id }) {
     yield put(ProductsActions.failureCategorys());
   }
 }
+
+export function* loadProduct({ id }) {
+  try {
+    const response = yield call(api.get, `products/${id}`);
+
+    yield put(ProductsActions.successProduct(response.data));
+  } catch (err) {
+    yield put(ProductsActions.failureProduct());
+  }
+}

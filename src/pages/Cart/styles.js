@@ -20,4 +20,14 @@ export const SubTotalPrice = styled.Text`
   margin-top: 10px;
 `;
 
-export const EmptyCart = styled.Text``;
+export const EmptyContainer = styled.View`
+  align-items: center;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 15px;
+`;
+
+export const EmptyCart = styled.Text`
+  font-weight: bold;
+  font-size: 32px;
+`;

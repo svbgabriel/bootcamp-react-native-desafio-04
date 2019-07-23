@@ -25,16 +25,22 @@ const CartItem = ({ product }) => (
       autoCorrect={false}
       underlineColorAndroid="transparent"
       keyboardType="numeric"
-      value={product.quantity}
+      value={String(product.quantity)}
     />
     <RemoveButton>
-      <Icon name="close" color="#c1c1c1" size={24} />
+      <Icon name="close" color="#c1c1c1" size={18} />
     </RemoveButton>
   </Container>
 );
 
 CartItem.propTypes = {
-  product: PropTypes.shape().isRequired,
+  product: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    brand: PropTypes.string,
+    price: PropTypes.number,
+    quantity: PropTypes.number,
+  }).isRequired,
 };
 
 export default CartItem;

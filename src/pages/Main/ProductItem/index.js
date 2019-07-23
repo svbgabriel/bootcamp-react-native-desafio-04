@@ -8,24 +8,28 @@ import {
 class ProductItem extends Component {
   static propTypes = {
     product: PropTypes.shape({
+      id: PropTypes.number,
       image: PropTypes.string,
       name: PropTypes.string,
       brand: PropTypes.string,
       price: PropTypes.number,
     }).isRequired,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+    }).isRequired,
   };
 
-  goToProduct = (product) => {
+  goToProduct = (id) => {
     const { navigation } = this.props;
 
-    navigation.navigate('Detail', { product });
+    navigation.navigate('Detail', { id });
   };
 
   render() {
     const { product } = this.props;
     return (
       <Container>
-        <ProductButton onPress={() => this.goToProduct(product)}>
+        <ProductButton onPress={() => this.goToProduct(product.id)}>
           <Photo source={{ uri: product.image }} />
           <Title>{product.name}</Title>
           <Brand>{product.brand}</Brand>

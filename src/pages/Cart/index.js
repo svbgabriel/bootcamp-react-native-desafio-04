@@ -8,7 +8,12 @@ import CartActions from '~/store/ducks/cart';
 import Header from '~/components/Header';
 import CartItem from '~/pages/Cart/CartItem';
 import {
-  Container, SubTotalContainer, SubTotalText, SubTotalPrice, EmptyCart,
+  Container,
+  SubTotalContainer,
+  SubTotalText,
+  SubTotalPrice,
+  EmptyContainer,
+  EmptyCart,
 } from './styles';
 
 const TabIcon = ({ tintColor }) => <Icon name="shopping-cart" size={20} color={tintColor} />;
@@ -20,6 +25,18 @@ TabIcon.propTypes = {
 class Cart extends Component {
   static navigationOptions = {
     tabBarIcon: TabIcon,
+  };
+
+  static propTypes = {
+    cart: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.string,
+        name: PropTypes.string,
+        brand: PropTypes.string,
+        price: PropTypes.number,
+        quantity: PropTypes.number,
+      }),
+    ).isRequired,
   };
 
   renderCartListItem = ({ item }) => <CartItem product={item} />;
@@ -42,7 +59,13 @@ class Cart extends Component {
       <Fragment>
         <Container>
           <Header title="Carrinho" />
-          {cart.length > 0 ? this.renderCartList() : <EmptyCart>Carrinho vazio</EmptyCart>}
+          {cart.length > 0 ? (
+            this.renderCartList()
+          ) : (
+            <EmptyContainer>
+              <EmptyCart>Carrinho vazio!</EmptyCart>
+            </EmptyContainer>
+          )}
         </Container>
         <SubTotalContainer>
           <SubTotalText>Subtotal</SubTotalText>

@@ -34,7 +34,7 @@ export const Price = styled.Text`
 `;
 
 export const Quantity = styled.TextInput`
-  height: 25px;
+  height: 35px;
   width: 30px;
   border-color: #c1c1c1;
   border-width: 1px;

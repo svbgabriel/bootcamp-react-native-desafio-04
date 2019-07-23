@@ -11,6 +11,9 @@ const { Types, Creators } = createActions({
   loadProducts: ['id'],
   successProducts: ['data'],
   failureProducts: null,
+  loadProduct: ['id'],
+  successProduct: ['data'],
+  failureProduct: null,
 });
 
 export const ProductsTypes = Types;
@@ -22,6 +25,7 @@ export const INITIAL_STATE = Immutable({
   categorys: [],
   products: [],
   currentCategory: -1,
+  currentProduct: {},
   loading: true,
 });
 
@@ -31,4 +35,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SUCCESS_CATEGORYS]: (state, { data }) => state.merge({ categorys: data }),
   [Types.SET_CURRENT_CATEGORY]: (state, { id }) => state.merge({ currentCategory: id }),
   [Types.SUCCESS_PRODUCTS]: (state, { data }) => state.merge({ products: data, loading: false }),
+  [Types.SUCCESS_PRODUCT]: (state, { data }) => state.merge({ currentProduct: data }),
 });
