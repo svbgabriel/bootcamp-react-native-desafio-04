@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import CartActions from '~/store/ducks/cart';
 import {
   Container,
   Photo,
@@ -12,7 +15,7 @@ import {
   RemoveButton,
 } from './styles';
 
-const CartItem = ({ product }) => (
+const CartItem = ({ product, removeProduct }) => (
   <Container>
     <Photo source={{ uri: product.image }} />
     <Description>
@@ -27,7 +30,7 @@ const CartItem = ({ product }) => (
       keyboardType="numeric"
       value={String(product.quantity)}
     />
-    <RemoveButton>
+    <RemoveButton onPress={() => removeProduct(product.id)}>
       <Icon name="close" color="#c1c1c1" size={18} />
     </RemoveButton>
   </Container>
@@ -35,12 +38,19 @@ const CartItem = ({ product }) => (
 
 CartItem.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.number,
     image: PropTypes.string,
     name: PropTypes.string,
     brand: PropTypes.string,
     price: PropTypes.number,
     quantity: PropTypes.number,
   }).isRequired,
+  removeProduct: PropTypes.func.isRequired,
 };
 
-export default CartItem;
+const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(CartItem);

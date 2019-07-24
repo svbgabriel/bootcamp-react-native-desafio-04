@@ -37,6 +37,7 @@ class Cart extends Component {
         quantity: PropTypes.number,
       }),
     ).isRequired,
+    subTotal: PropTypes.number.isRequired,
   };
 
   renderCartListItem = ({ item }) => <CartItem product={item} />;
@@ -53,7 +54,7 @@ class Cart extends Component {
   };
 
   render() {
-    const { cart } = this.props;
+    const { cart, subTotal } = this.props;
 
     return (
       <Fragment>
@@ -69,7 +70,7 @@ class Cart extends Component {
         </Container>
         <SubTotalContainer>
           <SubTotalText>Subtotal</SubTotalText>
-          <SubTotalPrice>R$</SubTotalPrice>
+          <SubTotalPrice>R${subTotal}</SubTotalPrice>
         </SubTotalContainer>
       </Fragment>
     );
@@ -78,6 +79,7 @@ class Cart extends Component {
 
 const mapStateToProps = state => ({
   cart: state.cart.cart,
+  subTotal: state.cart.subTotal,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
