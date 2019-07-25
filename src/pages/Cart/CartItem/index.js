@@ -15,7 +15,7 @@ import {
   RemoveButton,
 } from './styles';
 
-const CartItem = ({ product, removeProduct }) => (
+const CartItem = ({ product, loadRemoveProduct }) => (
   <Container>
     <Photo source={{ uri: product.image }} />
     <Description>
@@ -30,7 +30,7 @@ const CartItem = ({ product, removeProduct }) => (
       keyboardType="numeric"
       value={String(product.quantity)}
     />
-    <RemoveButton onPress={() => removeProduct(product.id)}>
+    <RemoveButton onPress={() => loadRemoveProduct(product.id)}>
       <Icon name="close" color="#c1c1c1" size={18} />
     </RemoveButton>
   </Container>
@@ -45,7 +45,7 @@ CartItem.propTypes = {
     price: PropTypes.number,
     quantity: PropTypes.number,
   }).isRequired,
-  removeProduct: PropTypes.func.isRequired,
+  loadRemoveProduct: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(CartActions, dispatch);
