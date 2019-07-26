@@ -7,6 +7,8 @@ const { Types, Creators } = createActions({
   addProductToCart: ['product'],
   loadRemoveProduct: ['id'],
   successRemoveProduct: ['cart'],
+  loadUpdateQuantity: ['id', 'newQuantity'],
+  successUpdateQuantity: ['cart'],
 });
 
 export const CartTypes = Types;
@@ -24,4 +26,5 @@ export const INITIAL_STATE = Immutable({
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD_PRODUCT_TO_CART]: (state, { product }) => state.merge({ cart: [...state.cart, product] }),
   [Types.SUCCESS_REMOVE_PRODUCT]: (state, { cart }) => state.merge({ cart }),
+  [Types.SUCCESS_UPDATE_QUANTITY]: (state, { cart }) => state.merge({ cart }),
 });
