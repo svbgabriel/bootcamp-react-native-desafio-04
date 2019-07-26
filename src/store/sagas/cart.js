@@ -13,11 +13,7 @@ export function* loadRemoveProduct({ id }) {
 export function* loadUpdateQuantity({ id, newQuantity }) {
   const cartFull = yield select(getCart);
 
-  const cartUnit = cartFull.find(cartItem => cartItem.id === id);
-  const newCartUnit = { ...cartUnit, quantity: newQuantity };
-
-  const cartRemoved = cartFull.filter(cartItem => cartItem.id !== id);
-  const newCart = [...cartRemoved, newCartUnit];
+  const newCart = cartFull.map(cartItem => (cartItem.id === id ? { ...cartItem, quantity: newQuantity } : cartItem));
 
   yield put(CartActions.successUpdateQuantity(newCart));
 }
