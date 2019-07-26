@@ -27,7 +27,7 @@ class Detail extends Component {
       price: PropTypes.number,
     }).isRequired,
     loadProduct: PropTypes.func.isRequired,
-    addProductToCart: PropTypes.func.isRequired,
+    loadAddProductToCart: PropTypes.func.isRequired,
     navigation: PropTypes.shape({
       getParam: PropTypes.func,
       navigate: PropTypes.func,
@@ -43,11 +43,11 @@ class Detail extends Component {
   }
 
   addToCart = (product) => {
-    const { addProductToCart, navigation } = this.props;
+    const { loadAddProductToCart, navigation } = this.props;
 
     const cartItem = { ...product, quantity: 1 };
 
-    addProductToCart(cartItem);
+    loadAddProductToCart(cartItem);
 
     navigation.navigate('Main');
   };
