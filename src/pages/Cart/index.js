@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { FlatList } from 'react-native';
+import { TextMask } from 'react-native-masked-text';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
@@ -11,7 +12,6 @@ import {
   Container,
   SubTotalContainer,
   SubTotalText,
-  SubTotalPrice,
   EmptyContainer,
   EmptyCart,
 } from './styles';
@@ -70,7 +70,18 @@ class Cart extends Component {
         </Container>
         <SubTotalContainer>
           <SubTotalText>Subtotal</SubTotalText>
-          <SubTotalPrice>R${subTotal}</SubTotalPrice>
+          <TextMask
+            type="money"
+            options={{
+              precision: 2,
+              separator: ',',
+              delimiter: '.',
+              unit: 'R$',
+              suffixUnit: '',
+            }}
+            style={{ fontSize: 20, color: '#1db954', marginTop: 10 }}
+            value={subTotal}
+          />
         </SubTotalContainer>
       </Fragment>
     );

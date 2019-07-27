@@ -39,12 +39,6 @@ export const Brand = styled.Text`
   font-size: 12px;
 `;
 
-export const Price = styled.Text`
-  color: #1db954;
-  font-weight: bold;
-  font-size: 18px;
-`;
-
 export const Add = styled.TouchableOpacity`
   background-color: #1db954;
   padding: 10px 50px 10px 50px;

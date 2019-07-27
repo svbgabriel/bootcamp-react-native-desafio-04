@@ -14,12 +14,6 @@ export const SubTotalText = styled.Text`
   font-size: 14px;
 `;
 
-export const SubTotalPrice = styled.Text`
-  font-size: 20px;
-  color: #1db954;
-  margin-top: 10px;
-`;
-
 export const EmptyContainer = styled.View`
   align-items: center;
   background-color: #fff;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TextMask } from 'react-native-masked-text';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,7 +14,6 @@ import {
   Description,
   Title,
   Brand,
-  Price,
   Add,
   AddText,
 } from './styles';
@@ -65,7 +65,18 @@ class Detail extends Component {
               <Title>{product.name}</Title>
               <Brand>{product.brand}</Brand>
             </Description>
-            <Price>R$ {product.price}</Price>
+            <TextMask
+              type="money"
+              options={{
+                precision: 2,
+                separator: ',',
+                delimiter: '.',
+                unit: 'R$',
+                suffixUnit: '',
+              }}
+              style={{ color: '#1db954', fontWeight: 'bold', fontSize: 18 }}
+              value={product.price}
+            />
           </TextContainer>
           <Add onPress={() => this.addToCart(product)}>
             <AddText>Adicionar ao carrinho</AddText>

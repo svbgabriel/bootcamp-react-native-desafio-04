@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { TextMask } from 'react-native-masked-text';
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 import {
-  Container, ProductButton, Photo, Title, Brand, Price,
+  Container, ProductButton, Photo, Title, Brand,
 } from './styles';
 
 class ProductItem extends Component {
@@ -33,7 +34,18 @@ class ProductItem extends Component {
           <Photo source={{ uri: product.image }} />
           <Title>{product.name}</Title>
           <Brand>{product.brand}</Brand>
-          <Price>R$ {product.price}</Price>
+          <TextMask
+            type="money"
+            options={{
+              precision: 2,
+              separator: ',',
+              delimiter: '.',
+              unit: 'R$',
+              suffixUnit: '',
+            }}
+            style={{ fontWeight: 'bold', color: '#1db954', fontSize: 14 }}
+            value={product.price}
+          />
         </ProductButton>
       </Container>
     );

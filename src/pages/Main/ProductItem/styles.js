@@ -27,9 +27,3 @@ export const Title = styled.Text`
 export const Brand = styled.Text`
   font-size: 12px;
 `;
-
-export const Price = styled.Text`
-  font-weight: bold;
-  color: #1db954;
-  font-size: 14px;
-`;
