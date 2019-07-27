@@ -33,13 +33,4 @@ export const Price = styled.Text`
   font-size: 16px;
 `;
 
-export const Quantity = styled.TextInput`
-  height: 35px;
-  width: 30px;
-  border-color: #c1c1c1;
-  border-width: 1px;
-  margin-right: 10px;
-  border-radius: 5px;
-`;
-
 export const RemoveButton = styled.TouchableOpacity``;
