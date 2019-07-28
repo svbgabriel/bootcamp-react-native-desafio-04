@@ -1,4 +1,4 @@
-package com.desafio4;
+package com.gocommerce;
 
 import android.app.Application;
 
