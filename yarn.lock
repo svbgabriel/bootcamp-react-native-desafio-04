@@ -5942,6 +5942,13 @@ react-native-numeric-input@^1.8.3:
     prop-types "^15.6.1"
     react-native-pixel-perfect "^1.0.1"
 
+react-native-onesignal@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.3.1.tgz#2c0ca054896d0c6ff2d0f8ac26747eb9907d41b0"
+  integrity sha512-gEYv4vihaE67fxQiW9ibUt+jW4fjxsPgwqNaLopeKU6jp+YpQSzAur5wySx/QrqFjCrWK9WwQljq64bxpDscXA==
+  dependencies:
+    invariant "^2.2.2"
+
 react-native-pixel-perfect@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-pixel-perfect/-/react-native-pixel-perfect-1.0.2.tgz#8e6dc97e377caa4bd07f9e584ba438d53c0e25e8"
